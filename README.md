@@ -1,2 +1,2 @@
-# account-activity-sentinel
-Comprehensive account activity monitoring: Account Activity Sentinel monitors all activity on your accounts, including logins, logouts, file changes, and more.
+# Account Activity Sentinel
+Comprehensive account activity monitoring: Account Activity Sentinel (AAS) monitors all activity on your accounts, including logins, logouts, file changes, devices, time, and more.
