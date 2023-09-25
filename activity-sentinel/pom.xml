@@ -14,7 +14,7 @@
 	<name>activity-sentinel</name>
 	<description>Comprehensive account activity monitoring: Account Activity Sentinel (AAS) monitors all activity on your accounts, including logins, logouts, file changes, devices, time, and more.</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
