@@ -16,4 +16,7 @@ spring:
         format_sql: true
   sql:
     init:
+      #to run schema file, set mode always, otherwise: never
       mode: never
+      continue-on-error: false
+
