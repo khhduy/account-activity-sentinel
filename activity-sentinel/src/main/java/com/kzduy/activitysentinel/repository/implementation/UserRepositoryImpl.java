@@ -7,7 +7,7 @@ import com.kzduy.activitysentinel.repository.RoleRepository;
 import com.kzduy.activitysentinel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -36,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository<User> {
     private final BCryptPasswordEncoder encoder;
 
     @Override
-    public User Create(User user) {
+    public User create(User user) {
         // Save new user to db
         // Check unique email?
         if (getEmailCount(user.getEmail().trim().toLowerCase()) > 0)
@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository<User> {
             // Send verification url
             String verificationUrl = getVerificationUrl(UUID.randomUUID().toString(), ACCOUNT.getType());
             // Save URL in verification table
-            jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY, Map.of("userId", user.getId(), "url", verificationUrl));
+            jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY, Map.of("userId", user.getId(), "token", verificationUrl));
             // Send email to user with verification URL
 //            emailService.sendVerificationUrl(user.getFirstName(), user.getEmail(), verificationUrl, ACCOUNT);
             user.setEnabled(false);
@@ -59,8 +59,6 @@ public class UserRepositoryImpl implements UserRepository<User> {
             // Return user in4 just added
             return user;
             // Throw exception
-        } catch (EmptyResultDataAccessException ex) {
-            throw new ApiException("No role found by name: " + ROLE_USER.name());
         } catch (Exception ex){
             throw new ApiException("Something went wrong, please try again" + ex.getMessage());
         }

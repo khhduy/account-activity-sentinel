@@ -1,13 +1,21 @@
 package com.kzduy.activitysentinel;
 
+import org.apache.catalina.security.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class ActivitySentinelApplication {
-
+	private static final int STRENGTH = 12;
 	public static void main(String[] args) {
 		SpringApplication.run(ActivitySentinelApplication.class, args);
 	}
-
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(STRENGTH);
+	}
 }

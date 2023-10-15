@@ -1,6 +1,8 @@
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
   datasource:
-    url: jdbc:mysql://192.168.1.8:3306/activity_sentinel
+    url: jdbc:mysql://localhost:3306/activity_sentinel
     password: 051202duy
     username: root
   jpa:

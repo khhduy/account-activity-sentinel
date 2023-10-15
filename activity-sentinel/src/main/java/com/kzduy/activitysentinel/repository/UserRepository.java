@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface UserRepository<T extends User>{
     //    Basic CRUD
-    T Create(T data);
+    T create(T data);
     //Read all with pagination
     Collection<T> list(int page, int pageSize);
     T get(Long id);
